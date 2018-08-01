@@ -67,7 +67,7 @@ const routes = [
 
 const router = new VueRouter({
     mode: 'history',
-    base:'testVue',
+    base:'test/vue',
     routes
 });
 

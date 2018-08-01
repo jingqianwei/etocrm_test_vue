@@ -97092,7 +97092,7 @@ var routes = [{
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
-    base: 'testVue',
+    base: 'test/vue',
     routes: routes
 });
 
