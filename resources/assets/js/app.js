@@ -8,6 +8,15 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI,{
+    size:'medium'
+});
+
+import store from './components/page/store';
+import router from './components/page/router';
+import App from './components/App.vue';
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -21,9 +30,9 @@ window.Vue = require('vue');
 //     el: '#app'
 // });
 
-import App from './components/App.vue';
-
 const app = new Vue({
     el: '#app',
+    router: router,
+    store: store,
     render: h => h(App)
 });

@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test/vue', function () {
+//Route::get('/test/vue', function () {
+//    return view('vue.main');
+//});
+
+Route::get('/test/vue/{any}', function () {
     return view('vue.main');
-});
+})->where('any','.*');

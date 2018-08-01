@@ -1,23 +1,28 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card card-default">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="app-main">
+        <el-container>
+            <el-header>
+                <router-view name="header"></router-view>
+            </el-header>
+            <el-container>
+                <el-aside width="200px">
+                    <router-view name="aside"></router-view>
+                </el-aside>
+                <el-main>
+                    <router-view name="main"></router-view>
+                </el-main>
+            </el-container>
+            <el-footer>
+                <router-view name="footer"></router-view>
+            </el-footer>
+        </el-container>
     </div>
 </template>
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        created(){
+            console.log('router:',this.$router, 'route:',this.$route)
         }
     }
 </script>
