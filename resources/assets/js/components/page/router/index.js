@@ -30,10 +30,6 @@ const routes = [
         },
         children: [
             {
-                path: '',
-                redirect: 'handle',
-            },
-            {
                 path: 'handle',
                 name: 'handle',
                 component: HandleDemo
@@ -54,14 +50,6 @@ const routes = [
                 component: NewDemo
             }
         ]
-    },
-    {
-        path: '404',
-        component: NotFound
-    },
-    {
-        path: '*',
-        redirect: '404'
     }
 ];
 

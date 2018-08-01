@@ -97063,9 +97063,6 @@ var routes = [{
         footer: __WEBPACK_IMPORTED_MODULE_9__layout_Footer_vue___default.a
     },
     children: [{
-        path: '',
-        redirect: 'handle'
-    }, {
         path: 'handle',
         name: 'handle',
         component: __WEBPACK_IMPORTED_MODULE_5__demo_Handle_vue___default.a
@@ -97082,12 +97079,6 @@ var routes = [{
         name: 'new',
         component: __WEBPACK_IMPORTED_MODULE_4__demo_New_vue___default.a
     }]
-}, {
-    path: '404',
-    component: __WEBPACK_IMPORTED_MODULE_3__404_vue___default.a
-}, {
-    path: '*',
-    redirect: '404'
 }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
