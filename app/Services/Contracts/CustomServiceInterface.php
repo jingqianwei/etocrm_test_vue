@@ -11,5 +11,6 @@ namespace App\Services\Contracts;
 
 Interface CustomServiceInterface
 {
+    //标准方法
     public function doSomethingUseful();
 }
