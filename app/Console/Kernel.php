@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ClearProjectCache::class, //清除项目所有缓存
     ];
 
     /**
