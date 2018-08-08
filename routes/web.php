@@ -22,3 +22,5 @@ Route::get('/', function () {
 Route::get('/test/vue/{any}', function () {
     return view('vue.main');
 })->where('any','.*');
+
+Route::get('/test/index', 'TestController@index');

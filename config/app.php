@@ -160,6 +160,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //自定义的Provider
+        App\Providers\EnvatoCustomServiceProvider::class,
+
     ],
 
     /*
