@@ -38,7 +38,9 @@ class ClearProjectCache extends Command
      */
     public function handle()
     {
+        //获取传入的参数
         $clearContent = $this->argument('clear');
+
         switch ($clearContent) {
             case 'route':
                 Artisan::call('route:clear');
