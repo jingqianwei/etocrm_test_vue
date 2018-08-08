@@ -65,6 +65,9 @@ class ClearProjectCache extends Command
                 Artisan::call('cache:clear');
                 $this->info('项目缓存清理成功！');
                 break;
+            default:
+                $this->info('没有对应的缓存类型！');
+                break;
         }
     }
 }
