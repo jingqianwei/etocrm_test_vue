@@ -23,4 +23,5 @@ Route::get('/test/vue/{any}', function () {
     return view('vue.main');
 })->where('any','.*');
 
+//测试新建provider来实例化service
 Route::get('/test/index', 'TestController@index');
