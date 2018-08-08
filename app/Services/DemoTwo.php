@@ -12,7 +12,7 @@ use App\Services\Contracts\CustomServiceInterface;
 
 class DemoTwo implements CustomServiceInterface
 {
-
+    //接口约束的方法
     public function doSomethingUseful()
     {
         return 'Output from DemoTwo';

@@ -12,7 +12,6 @@ use App\Services\Contracts\CustomServiceInterface;
 
 class DemoOne implements CustomServiceInterface
 {
-
     //接口约束的方法
     public function doSomethingUseful()
     {
