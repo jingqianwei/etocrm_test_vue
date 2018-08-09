@@ -31,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
                             $sql->bindings[$i] = $binding->format("'Y-m-d H:i:s'");
                         } else {
                             if (is_string($binding)) {
-                                $sql->bindings[$i] = "'$binding'";
+                                $sql->bindings[$i] = "{$binding}";
                             }
                         }
                     }
