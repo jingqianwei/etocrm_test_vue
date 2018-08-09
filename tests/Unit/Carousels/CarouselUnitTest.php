@@ -16,9 +16,9 @@ class CarouselUnitTest extends TestCase
     public function testExample()
     {
         $data = [
-            'title' => 1, //$this->faker->word,
-            'link' => 2, //$this->faker->url,
-            'src' => 3, //$this->faker->url,
+            'title' => $this->faker->word,
+            'link' => $this->faker->url,
+            'src' => $this->faker->url,
         ];
 
         $carouselRepo = new CarouselRepository(new Carousel);
@@ -28,6 +28,5 @@ class CarouselUnitTest extends TestCase
         $this->assertEquals($data['title'], $carousel->title);
         $this->assertEquals($data['link'], $carousel->link);
         $this->assertEquals($data['src'], $carousel->src);
-        $this->assertTrue(true);
     }
 }
