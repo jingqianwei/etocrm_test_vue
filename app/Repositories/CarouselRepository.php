@@ -12,7 +12,6 @@ use App\Exceptions\CreateCarouselErrorException;
 use Illuminate\Database\QueryException;
 use App\Models\Carousel;
 
-
 class CarouselRepository
 {
     public $model = null;
