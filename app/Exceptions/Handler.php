@@ -13,7 +13,7 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontReport = [
-        //
+        CreateCarouselErrorException::class, //自定义的错误类型
     ];
 
     /**

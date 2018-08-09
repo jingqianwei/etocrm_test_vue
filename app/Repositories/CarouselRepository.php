@@ -35,7 +35,7 @@ class CarouselRepository
         try {
             return $this->model->create($data);
         } catch (QueryException $e) {
-            throw new CreateCarouselErrorException($e);
+            throw new CreateCarouselErrorException($e, 500);
         }
     }
 }
