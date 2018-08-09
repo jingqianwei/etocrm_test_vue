@@ -25,3 +25,5 @@ Route::get('/test/vue/{any}', function () {
 
 //测试新建provider来实例化service
 Route::get('/test/index', 'TestController@index');
+
+Route::get('/member/index', 'MemberController@loginSub');

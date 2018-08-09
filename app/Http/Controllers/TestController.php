@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Events\MyEvent;
 use App\Services\Contracts\CustomServiceInterface;
+use App\Http\Resources\testResource;
 use Illuminate\Http\Request;
+use App\Events\MyEvent;
+use App\Models\User;
 
 class TestController extends Controller
 {
