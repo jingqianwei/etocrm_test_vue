@@ -16,9 +16,9 @@ class CarouselUnitTest extends TestCase
     public function testExample()
     {
         $data = [
-            'title' => $this->faker->word,
-            'link' => $this->faker->url,
-            'src' => $this->faker->url,
+            'title' => 1, //$this->faker->word,
+            'link' => 2, //$this->faker->url,
+            'src' => 3, //$this->faker->url,
         ];
 
         $carouselRepo = new CarouselRepository(new Carousel);
