@@ -1,6 +1,7 @@
 import axios from 'axios'
 import json_response_codes from './codes'
 import config from '../config'
+import { Loading } from 'element-ui'
 
 // 创建axios实例
 const Axios = axios.create({
@@ -10,7 +11,7 @@ const Axios = axios.create({
 });
 
 // override axios's default accept
-Axios.defaults.headers.common['Accept'] = 'application/json'
+Axios.defaults.headers.common['Accept'] = 'application/json';
 
 // 拦截所有的 api 请求，未来可做权限检查，缓存，代理等
 Axios.interceptors.request.use(
@@ -38,6 +39,7 @@ Axios.interceptors.response.use(
         }
 
         if (error.message === 'timeout of 5000ms exceeded') {
+            Loading.service({ fullscreen: true });
             return Promise.reject(error);
         }
 
