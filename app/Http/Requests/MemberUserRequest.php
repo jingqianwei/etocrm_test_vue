@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ValidRepository;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidRepository;
 use App\Rules\ValidLoginEmail;
 use Illuminate\Http\Request;
 use App\Rules\SimpleRule;
