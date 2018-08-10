@@ -2,24 +2,27 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidRepository;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidLoginEmail;
 use Illuminate\Http\Request;
+use App\Rules\SimpleRule;
 
 class MemberUserRequest extends FormRequest
 {
     //公共部分
-    public $rules=[
-        'username' => 'required|max:10|unique:la_member',
-        'password' => 'required|between:6,20|confirmed',
+    public $rules = [
+        'username' => 'required|max:10',
+        'password' => 'required|between:6,20',
     ];
 
     //这里我只写了部分字段，可以定义全部字段
-    protected $messages=[
+    protected $messages = [
         'username.required' => '用户名必填',
         'username.max' => '用户名最多为10字符',
         'username.unique' => '用户名已存在',
         'email.required' => '邮箱必填',
-        'email.email' => '邮箱格式错误11',
+        'email.email' => '邮箱格式错误',
         'password.required' => '密码必填',
         'password.between' => '密码长度为6-20位字符',
         'password.confirmed' => '两次密码不一致',
@@ -47,8 +50,13 @@ class MemberUserRequest extends FormRequest
         $rules = $this->rules;
         // Request::getPathInfo()方法获取命名路由，用来区分不同页面
         if(Request::getPathInfo() == '/admin/reg_sub'){ //路由为/admin/reg_sub的特有验证部分
-            $rules['email'] = 'required|email';
+            $rules['email'] = new ValidLoginEmail(); //自定义了一个email的规则
             $rules['code'] = 'required|between:4,4';
+            $rules['title'] = new SimpleRule(); //自定义了一个简单的规则
+            $rules['repository'] = [
+                'required',
+                new ValidRepository($this->source(), Request()->branch)
+            ];
         }
 
         return $rules;
