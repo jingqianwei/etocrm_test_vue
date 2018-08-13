@@ -18,6 +18,7 @@ class MemberController extends Controller
     // 登录提交, 自定义了Request请求
     public function loginSub(MemberUserRequest $request)
     {
+        dd($request->username);
         dd(new Users(User::all()));
         dd($request->all());
         //引入验证控制器后它会自动验证，不需其他操作
