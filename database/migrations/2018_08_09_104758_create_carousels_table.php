@@ -20,6 +20,8 @@ class CreateCarouselsTable extends Migration
             $table->string('src');
             $table->timestamps();
         });
+
+        DB::statement("ALTER TABLE `users` comment'平台:测试表'"); //表注释
     }
 
     /**

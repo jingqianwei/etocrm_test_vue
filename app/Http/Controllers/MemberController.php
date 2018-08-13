@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberUserRequest;
+use Illuminate\Support\Facades\Crypt;
 use App\Http\Resources\Users;
 use App\Models\User;
-use Illuminate\Support\Facades\Crypt;
 
 class MemberController extends Controller
 {
