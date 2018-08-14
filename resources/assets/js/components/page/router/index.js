@@ -1,9 +1,8 @@
 // Register VueRouter
-import Vue from 'vue';
+import Vue from 'vue'
 import VueRouter from 'vue-router'
 // App component and 404 component are page-level components
 import Main from '../Main.vue'
-import NotFound from '../404.vue'
 
 // segment components inside App Component's workspace section
 import NewDemo from '../../demo/New.vue'

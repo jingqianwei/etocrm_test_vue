@@ -23,6 +23,11 @@
     export default {
         created(){
             console.log('router:',this.$router, 'route:',this.$route)
+        },
+        methods: {
+            ...mapActions([
+                'login',
+            ])
         }
     }
 </script>

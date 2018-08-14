@@ -5,13 +5,13 @@ import Api from '../../../api'
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    state: {
+    state: { //存属性
         app:{
             name:'Sticky Card Designer',
             version:'1.0'
         }
     },
-    mutations: {
+    mutations: { //修改属性方法
         save_user_info(state,payload){
             state.user = payload;
         }
