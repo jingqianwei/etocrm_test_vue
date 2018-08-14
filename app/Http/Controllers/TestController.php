@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Services\Contracts\CustomServiceInterface;
-use App\Http\Resources\testResource;
 use Illuminate\Http\Request;
 use App\Events\MyEvent;
 use App\Models\User;
