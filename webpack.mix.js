@@ -1,8 +1,7 @@
 let mix = require('laravel-mix');
-let env = require('minimist')(process.argv.slice(2));
 
-if (env && env.admin) {
-    require(`${__dirname}\\webpack.admin.js`);
+if (process.env.MIX_SENTRY_DSN_PUBLIC == 'shop') {
+    require(`${__dirname}\\webpack.shop.js`);
     return;
 }
 
@@ -19,5 +18,8 @@ if (env && env.admin) {
 
 mix.js('resources/assets/js/app.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
-   .sass('resources/assets/sass/vue.scss', 'public/css')
-   .version()
+   .sass('resources/assets/sass/vue.scss', 'public/css');
+
+if (mix.inProduction()) { //生产环境加版本号
+    mix.version();
+}

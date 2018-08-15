@@ -13,5 +13,8 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/shop.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
-   .sass('resources/assets/sass/shop.scss', 'public/css')
-    .version()
+   .sass('resources/assets/sass/shop.scss', 'public/css');
+
+if (mix.inProduction()) { //生产环境加版本号
+    mix.version();
+}
