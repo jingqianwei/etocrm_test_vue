@@ -27,3 +27,5 @@ Route::get('/test/vue/{any}', function () {
 Route::get('/test/index', 'TestController@index');
 
 Route::get('/member/index', 'MemberController@loginSub');
+
+Route::view('/shop', 'vue.shop');
