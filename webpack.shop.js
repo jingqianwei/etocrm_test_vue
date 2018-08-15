@@ -1,10 +1,4 @@
 let mix = require('laravel-mix');
-let env = require('minimist')(process.argv.slice(2));
-
-if (env && env.admin) {
-    require(`${__dirname}\\webpack.admin.js`);
-    return;
-}
 
 /*
  |--------------------------------------------------------------------------
@@ -17,7 +11,7 @@ if (env && env.admin) {
  | 参考网址：https://segmentfault.com/a/1190000010437630
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
+mix.js('resources/assets/js/shop.js', 'public/js')
    .sass('resources/assets/sass/app.scss', 'public/css')
-   .sass('resources/assets/sass/vue.scss', 'public/css')
-   .version()
+   .sass('resources/assets/sass/shop.scss', 'public/css')
+    .version()
