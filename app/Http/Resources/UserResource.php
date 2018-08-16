@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class UserResource extends JsonResource
 {
     /**
+     * 参考网址：https://laravel-china.org/docs/laravel/5.6/eloquent-resources/1407
      * 将资源转换成数组, 对接口返回的数据进行处理
      * @param  \Illuminate\Http\Request $request
      * @return array
