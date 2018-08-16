@@ -152,7 +152,6 @@ trait ApiResponse
         return $this->failed($message, FoundationResponse::HTTP_INTERNAL_SERVER_ERROR);
     }
 
-
     /**
      * @Describe: 执行成功
      * @Author: chinwe.jing
