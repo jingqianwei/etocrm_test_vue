@@ -150,6 +150,10 @@ return [
         /*
          * Package Service Providers...
          */
+        // excel表格，参考网址：https://laravel-excel.maatwebsite.nl/3.0/getting-started/installation.html
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+        // image图片处理
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -162,7 +166,6 @@ return [
 
         //自定义的Provider
         App\Providers\EnvatoCustomServiceProvider::class,
-
     ],
 
     /*
@@ -212,6 +215,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        //excel表格包
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        //image图片处理
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];
