@@ -2,14 +2,17 @@
 
 namespace App\Providers;
 
+
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Processor\ProcessIdProcessor;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 use Monolog\Processor\UidProcessor;
 use Illuminate\Support\Facades\DB;
 use App\Observers\UserObserver;
 use App\Models\User;
 use Monolog\Logger;
+use Carbon\Carbon;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //设置本地为zh
+        Carbon::setLocale('zh');
+        //设置数据表字符串字段的默认长度
+        Schema::defaultStringLength(190);
         //注册观察者
         User::observe(UserObserver::class);
 
