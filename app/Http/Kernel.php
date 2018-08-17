@@ -14,11 +14,18 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
+        // 检测应用是否进入『维护模式』
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        // 检测请求的数据是否过大
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
+        // 对提交请求的参数进行PHP函数 `trim()` 处理
         \App\Http\Middleware\TrimStrings::class,
+        // 将提交请求参数中空字符串转化为null
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+        // 修正代理服务器后的服务器参数
         \App\Http\Middleware\TrustProxies::class,
+        // 记录用户最后活跃时间
+        \App\Http\Middleware\RecordLastActivedTime::class,
     ];
 
     /**

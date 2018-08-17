@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\LastActivedAtHelper;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -27,7 +28,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, LastActivedAtHelper;
 
     /**
      * The attributes that are mass assignable.
