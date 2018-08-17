@@ -26,6 +26,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrustProxies::class,
         // 记录用户最后活跃时间
         \App\Http\Middleware\RecordLastActivedTime::class,
+        // 允许跨域
+        \App\Http\Middleware\CrossHttp::class,
     ];
 
     /**
