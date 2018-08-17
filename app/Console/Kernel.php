@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\ClearProjectCache::class, //清除项目所有缓存
+        //
     ];
 
     /**
@@ -26,6 +26,9 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        // 每日0点执行一次，同步redis最后范文时间到数据库
+        $schedule->command('chinwe:sync-user-actived-at')->dailyAt('00:00');
+
     }
 
     /**
