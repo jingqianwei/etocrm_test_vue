@@ -14,7 +14,7 @@ class BackupDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'db:backup';
+    protected $signature = 'db:backup {connection=mysql}';
 
     /**
      * The console command description.
@@ -36,11 +36,14 @@ class BackupDatabase extends Command
             mkdir(storage_path('backups'), 0777);
         }
 
+        //选择备份那个数据库，默认为mysql
+        $dbConnection = $this->argument('connection');
+
         $this->process = new Process(sprintf(
             'mysqldump -u%s -p%s %s > %s',
-            config('database.connections.mysql.username'),
-            config('database.connections.mysql.password'),
-            config('database.connections.mysql.database'),
+            config("database.connections.{$dbConnection}.username"),
+            config("database.connections.{$dbConnection}.password"),
+            config("database.connections.{$dbConnection}.database"),
             storage_path('backups') . DIRECTORY_SEPARATOR . 'backup_' . date('Ymd') . '.sql'
         ));
     }
