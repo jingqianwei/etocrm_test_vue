@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\UserResource;
 use App\Services\Contracts\CustomServiceInterface;
+use App\Http\Resources\UserResource;
+use Cblink\ExcelZip\ExcelZip;
 use Illuminate\Http\Request;
 use App\Events\MyEvent;
+use App\utils\Export;
 use App\Models\User;
 
 class TestController extends Controller
@@ -48,5 +50,41 @@ class TestController extends Controller
         } else {
             echo '是字符串';
         }
+    }
+
+    /**
+     * @Describe: 通过数据库 chunk 分批导出（推荐！）
+     * @Author: chinwe.jing
+     * @Data: 2018/8/21 15:37
+     * @param ExcelZip $excelZip
+     * @param Export $export
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \Exception
+     */
+    public function export1(ExcelZip $excelZip, Export $export)
+    {
+        // set_time_limit(0); 提醒，小心脚本超时
+        $excelZip = $excelZip->setExport($export);
+
+        User::query()->chunk(5000, function ($members) use ($excelZip) {
+            $excelZip->excel($members);
+        });
+
+        return $excelZip->zip();
+    }
+
+    /**
+     * @Describe: 包内 chunk 实现（不推荐，如果数据量过大会出现 DB 层面的内存溢出）
+     * @Author: chinwe.jing
+     * @Data: 2018/8/21 15:37
+     * @param ExcelZip $excelZip
+     * @param Export $export
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     */
+    public function export2(ExcelZip $excelZip, Export $export)
+    {
+        return $excelZip->download(User::all(), $export);
     }
 }
