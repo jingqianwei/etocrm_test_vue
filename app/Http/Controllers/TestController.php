@@ -13,6 +13,32 @@ class TestController extends Controller
     //测试写一个新的provide，然后根据不同的条件来实例化不同的service
     public function index(CustomServiceInterface $customServiceInstance, Request $request)
     {
+
+        $data = [
+            [
+                'create_at'=> '2018',
+                'num'=>1,
+            ],
+            [
+                'create_at'=> '2018',
+                'num'=>2,
+            ],
+            [
+                'create_at'=> '2017',
+                'num'=>3,
+            ],
+            [
+                'create_at'=> '2016',
+                'num'=>4,
+            ]
+        ];
+
+        $multiplied = collect($data)->groupBy('create_at')
+                                    ->map(function($item){
+                                        return ['total_num' => $item->sum('num')];
+                                    })->toArray();
+
+        dd($multiplied);
         return UserResource::collection(User::all()); //用于多条数据处理接口返回的数据结构处理，可以自由的组合
         return new UserResource(User::find(2));   //用于单个数据接口返回的数据结构处理，可以自由的组合
         //return $this->response([1, 2, 3]); //响应返回
