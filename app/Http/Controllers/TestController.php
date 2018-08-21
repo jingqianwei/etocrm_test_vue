@@ -87,4 +87,17 @@ class TestController extends Controller
     {
         return $excelZip->download(User::all(), $export);
     }
+
+    public function swoole()
+    {
+        $cli = new \Swoole\Coroutine\Http\Client('127.0.0.1', 80);
+        $cli->setHeaders([
+            'Host' => 'test.me',
+        ]);
+        $cli->get('/');
+        $result = $cli->body;
+        $cli->close();
+
+        return response()->json($result);
+    }
 }
