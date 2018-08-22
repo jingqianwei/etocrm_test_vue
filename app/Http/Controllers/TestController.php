@@ -44,7 +44,7 @@ class TestController extends Controller
                                     })->toArray();
 
         dd($multiplied);
-         //用于多条数据处理接口返回的数据结构处理，可以自由的组合
+        return UserResource::collection(User::all()); //用于多条数据处理接口返回的数据结构处理，可以自由的组合
         return new UserResource(User::find(2));   //用于单个数据接口返回的数据结构处理，可以自由的组合
         //return $this->response([1, 2, 3]); //响应返回
         event(new MyEvent()); //触发事件
