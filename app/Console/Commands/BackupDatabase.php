@@ -35,17 +35,6 @@ class BackupDatabase extends Command
         if (!file_exists(storage_path('backups'))) {
             mkdir(storage_path('backups'), 0777);
         }
-
-        //选择备份那个数据库，默认为mysql
-        $dbConnection = $this->argument('connection');
-
-        $this->process = new Process(sprintf(
-            'mysqldump -u%s -p%s %s > %s',
-            config("database.connections.{$dbConnection}.username"),
-            config("database.connections.{$dbConnection}.password"),
-            config("database.connections.{$dbConnection}.database"),
-            storage_path('backups') . DIRECTORY_SEPARATOR . 'backup_' . date('Ymd') . '.sql'
-        ));
     }
 
     /**
@@ -55,11 +44,31 @@ class BackupDatabase extends Command
      */
     public function handle()
     {
+        //选择备份那个数据库，默认为mysql
+        $dbConnection = $this->argument('connection');
+        $this->setProcess($dbConnection);
         try {
             $this->process->mustRun();
             $this->info('The backup has been proceed successfully.');
         } catch (ProcessFailedException $e) {
             $this->error('The backup process has been failed, reason is: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * @Describe: 设置process的值
+     * @Author: chinwe.jing
+     * @Data: 2018/8/22 10:14
+     * @param $dbConnection
+     */
+    public function setProcess($dbConnection)
+    {
+        $this->process = new Process(sprintf(
+            'mysqldump -u%s -p%s %s > %s',
+            config("database.connections.{$dbConnection}.username"),
+            config("database.connections.{$dbConnection}.password"),
+            config("database.connections.{$dbConnection}.database"),
+            storage_path('backups') . DIRECTORY_SEPARATOR . 'backup_' . date('Ymd') . '.sql'
+        ));
     }
 }
