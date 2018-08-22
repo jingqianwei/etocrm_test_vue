@@ -15,7 +15,6 @@ class TestController extends Controller
     //测试写一个新的provide，然后根据不同的条件来实例化不同的service
     public function index(CustomServiceInterface $customServiceInstance, Request $request)
     {
-
         $val = 1;
         $con = $val ?: 0; //php7新特性
         dd($con);
