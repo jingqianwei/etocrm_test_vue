@@ -62,19 +62,26 @@ class BaseManager
     public function store(UploadedFile $file, $dir = null)
     {
         $hashName = $file->hashName();
-
         $mine = $file->getMimeType();
 
-        $realName = $this->disk->putFileAs($dir, $file, $hashName);
+        try{
+            $realName = $this->disk->putFileAs($dir, $file, $hashName);
 
-        return [
-            'success' => true,
-            'filename' => $hashName,
-            'original_name' => $file->getClientOriginalName(),
-            'mine' => $mine,
-            'size' => $file->getSize(),
-            'relative_url' => '/storage/' . $realName,
-            'full_relative_url' => url('/storage/' . $realName),
-        ];
+            return [
+                'success' => true,
+                'filename' => $hashName,
+                'original_name' => $file->getClientOriginalName(),
+                'mine' => $mine,
+                'size' => $file->getSize(),
+                'relative_url' => '/storage/' . $realName,
+                'full_relative_url' => url('/storage/' . $realName),
+            ];
+        } catch (\Exception $e) {
+            return [
+                'success' => false,
+                'errCode' => $e->getCode(),
+                'errMsg' => __METHOD__ . $e->getMessage(),
+            ];
+        }
     }
 }
