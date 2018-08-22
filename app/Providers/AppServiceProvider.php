@@ -23,10 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //设置本地为zh
+        //更改日期提示为中文
         Carbon::setLocale('zh');
         //设置数据表字符串字段的默认长度
-        Schema::defaultStringLength(190);
+        Schema::defaultStringLength(150);
         //注册观察者
         User::observe(UserObserver::class);
 
