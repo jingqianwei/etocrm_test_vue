@@ -29,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(150);
         //注册观察者
         User::observe(UserObserver::class);
+        //取消为模型设置事件调度器
+        //User::unsetEventDispatcher();
 
         if (config('app.env') === 'local') { //本地开发环境才打印sql日志
             DB::listen(
