@@ -154,7 +154,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         // image图片处理
         Intervention\Image\ImageServiceProvider::class,
-
+        //钉钉消息通知
+        DingNotice\DingNoticeServiceProvider::class,
         /*
          * Application Service Providers...
          */

@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Wujunze\DingTalkException\DingTalkExceptionHelper;
 
 class Handler extends ExceptionHandler
 {
@@ -36,6 +37,8 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        //钉钉消息通知
+        DingTalkExceptionHelper::notify($exception, true);
         parent::report($exception);
     }
 

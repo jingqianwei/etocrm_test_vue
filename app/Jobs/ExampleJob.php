@@ -13,6 +13,7 @@ class ExampleJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
+     * 任务调度是定时触发的，而队列一般是用户的特定行为来触发的 比如注册后的邮件发送就是注册这个行为来触发的
      * 参考网址：https://laravel-china.org/topics/13290/excitement-first-contact-with-the-queue-take-a-look-at-your-mind-and-add-two-questions
      * 注意点：在这个方法中应该使用 DB 类直接对数据库进行操作，以避免如果有模型监听器的情况下，造成死循环的问题。
      * Create a new job instance.
