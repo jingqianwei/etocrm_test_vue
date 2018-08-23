@@ -7,9 +7,6 @@
  */
 
 namespace App\Models;
-
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * App\Models\Carousel
  *
@@ -27,7 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Carousel whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class Carousel extends Model
+class Carousel extends BaseModel
 {
     /**
      * 自定义时间， false：自定义时间， true：程序自动设置时间，默认为true
