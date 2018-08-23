@@ -70,4 +70,20 @@ class Sftp
 
         return $rc;
     }
+
+    //目录是否存在
+    public function ssh2_dir_exits($dir)
+    {
+        $sftp = ssh2_sftp($this->conn);
+        if (is_dir("ssh2.sftp://{$sftp}/{$dir}")) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function sftp_mkDir($dir) {
+        $sftp = ssh2_sftp($this->conn);
+        ssh2_sftp_mkdir($sftp, $dir);
+    }
 }
