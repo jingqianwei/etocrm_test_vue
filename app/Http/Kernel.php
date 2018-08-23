@@ -28,6 +28,8 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\RecordLastActivedTime::class,
         // 允许跨域
         \App\Http\Middleware\CrossHttp::class,
+        // 多表登陆
+        \App\Http\Middleware\PassportCustomProviderAccessToken::class
     ];
 
     /**
@@ -68,5 +70,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        //多表登陆
+        'passport-administrators' => \App\Http\Middleware\PassportCustomProvider::class,
     ];
 }

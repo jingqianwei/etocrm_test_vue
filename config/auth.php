@@ -45,6 +45,12 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        //增加一个guard
+        'admin_user_api' => [
+            'driver' => 'passport',
+            'provider' => 'admin_users',
+        ],
     ],
 
     /*
@@ -74,6 +80,12 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        // 多表登陆
+        'admin_users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AdminUser::class,
+        ],
     ],
 
     /*
@@ -94,6 +106,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+
+        // 多表登陆
+        'admin_users' => [
+            'provider' => 'admin_users',
             'table' => 'password_resets',
             'expire' => 60,
         ],
