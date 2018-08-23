@@ -14,6 +14,10 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers, ProxyTrait;
 
+    /**
+     * 参考网址：https://laravel-china.org/articles/13902/passport-api-authentication-multi-table-login
+     * LoginController constructor.
+     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout,adminUserLogout,refreshToken');
