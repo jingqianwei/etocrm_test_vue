@@ -37,8 +37,16 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        //钉钉消息通知
-        DingTalkExceptionHelper::notify($exception, true);
+        if(empty(env('APP_DEBUG')) && $exception->getMessage()) {
+            //发邮件通知
+            \Mail::raw($exception . 'server:' . json_encode(\Request::server()), function ($m) {
+                $m->subject('产品错误监控');
+                $m->to('chinwe.jing@etocrm.com');
+            });
+
+            //钉钉消息通知
+            DingTalkExceptionHelper::notify($exception, true);
+        }
         parent::report($exception);
     }
 
