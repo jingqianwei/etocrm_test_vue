@@ -38,7 +38,7 @@ class Handler extends ExceptionHandler
     public function report(Exception $exception)
     {
         if(empty(env('APP_DEBUG')) && $exception->getMessage()) {
-            //发邮件通知
+            //发邮件通知，邮件属于全文本内容
             \Mail::raw($exception . 'server:' . json_encode(\Request::server()), function ($m) {
                 $m->subject('产品错误监控');
                 $m->to('chinwe.jing@etocrm.com');
