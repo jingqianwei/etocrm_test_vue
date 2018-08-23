@@ -28,8 +28,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\RecordLastActivedTime::class,
         // 允许跨域
         \App\Http\Middleware\CrossHttp::class,
-        // 多表登陆
-        \App\Http\Middleware\PassportCustomProviderAccessToken::class
     ];
 
     /**
