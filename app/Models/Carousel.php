@@ -7,6 +7,8 @@
  */
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Builder;
+
 /**
  * App\Models\Carousel
  *
@@ -61,5 +63,58 @@ class Carousel extends BaseModel
             $model->updated_at = now()->toDateTimeString();
             return true;
         });
+
+        //匿名的全局作用域, 每个查询都会加这个条件
+        static::addGlobalScope('age', function (Builder $builder) {
+            $builder->where('age', '>', 200);
+        });
+
+        // 全局作用域是闭包的话：
+        Carousel::withoutGlobalScope('age')->get();
+
+        // 取消全部作用域
+        Carousel::withoutGlobalScopes()->get();
+
+        // 取消个别全局作用域
+        Carousel::withoutGlobalScopes([
+            Carousel::class, User::class
+        ])->get();
+    }
+
+    /**
+     * 只查询受欢迎的用户.
+     *
+     * 使用方法 Carousel::popular()->active()->orderBy('created_at')->get();
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePopular($query)
+    {
+        return $query->where('votes', '>', 100);
+    }
+
+    /**
+     * 只查询 active 的用户.
+     *
+     * 使用方法 Carousel::popular()->active()->orderBy('created_at')->get();
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('active', 1);
+    }
+
+    /**
+     * 查询只包含特定类型的用户.
+     *
+     * 使用方法 $users = Carousel::ofType('admin')->get(); //查询为admin的用户
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param mixed $type
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('type', $type);
     }
 }
