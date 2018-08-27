@@ -1,4 +1,6 @@
+import VueRouter from 'vue-router'
 import View from '../View.vue';
+
 
 const routes = [
     {   path: '/',
