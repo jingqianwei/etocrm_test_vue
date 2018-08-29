@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\Contracts\CustomServiceInterface;
 use App\Http\Resources\UserResource;
+use App\utils\Sftp;
 use Cblink\ExcelZip\ExcelZip;
 use Illuminate\Http\Request;
 use App\Events\MyEvent;
@@ -15,6 +16,21 @@ class TestController extends Controller
     //测试写一个新的provide，然后根据不同的条件来实例化不同的service
     public function index(CustomServiceInterface $customServiceInstance, Request $request)
     {
+        $config = [
+            "host"=> "192.168.78.129",
+            "user"=> "jqw",
+            "port"=> "22",
+            "passwd"=> "root"
+        ];
+
+        $sftp = new Sftp($config);
+        if (!$sftp->connect()) { //sftp连接
+            echo '连接失败';
+        }
+
+        $file = storage_path('logs/laravel.log');
+        dd($sftp->upload($file, '/home/jqw/test.log'));
+        //dd($sftp->ssh2_dir_exits('home/jqw/www'));
         event(new MyEvent()); //触发事件
         dda($this->base64());
         dd($this->base64());

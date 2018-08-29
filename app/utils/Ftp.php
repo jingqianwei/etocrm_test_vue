@@ -34,8 +34,8 @@ class Ftp
     /**
      * 方法：上传文件
      * @param $path -- 本地路径
-     * @param $newpath -- 上传路径
-     * @param bool $type
+     * @param $newpath -- ftp服务器上传路径
+     * @param bool $type true：路径文件存在，false：路径文件不存在
      */
     public function upFile($path, $newpath, $type = true)
     {
@@ -46,9 +46,9 @@ class Ftp
 
     /**
      * 方法：移动文件
-     * @param $path -- 原路径
-     * @param $newpath -- 新路径
-     * @param bool $type
+     * @param $path -- ftp服务器上原路径
+     * @param $newpath -- ftp服务器上新路径
+     * @param bool $type true：路径文件存在，false：路径文件不存在
      */
     public function moveFile($path, $newpath, $type = true)
     {
@@ -60,9 +60,9 @@ class Ftp
     /**
      * 方法：复制文件
      * 说明：由于FTP无复制命令,本方法变通操作为：下载后再上传到新的路径
-     * @param $path -- 原路径
-     * @param $newpath -- 新路径
-     * @param bool $type
+     * @param $path -- ftp服务器上原路径
+     * @param $newpath -- ftp服务器上新路径
+     * @param bool $type true：路径文件存在，false：路径文件不存在
      */
     public function copyFile($path, $newpath, $type = true)
     {
@@ -74,7 +74,7 @@ class Ftp
 
     /**
      * 方法：删除文件
-     * @param $path -- 路径
+     * @param $path -- ftp服务器上的路径
      */
     public function delFile($path)
     {
@@ -84,9 +84,9 @@ class Ftp
 
     /**
      * 方法：生成目录
-     * @param $path -- 路径
+     * @param $path -- ftp服务器上的路径
      */
-    public function mkDirs($path)
+    public function mkDtrueirs($path)
     {
         $path_arr = explode('/', $path);       // 取目录数组
         array_pop($path_arr);                    // 弹出文件名
