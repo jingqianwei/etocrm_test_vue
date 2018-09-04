@@ -154,8 +154,10 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         // image图片处理
         Intervention\Image\ImageServiceProvider::class,
-        //钉钉消息通知
+        // 钉钉消息通知
         DingNotice\DingNoticeServiceProvider::class,
+        // 客户端识别信息
+        Jenssegers\Agent\AgentServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -220,6 +222,10 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         //image图片处理
         'Image' => Intervention\Image\Facades\Image::class,
+        //客户端识别信息
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        //通过ip获取详细地址
+        'Ip'  => Zhuzhichao\IpLocationZh\Ip::class, 
     ],
 
 ];
