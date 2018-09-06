@@ -225,7 +225,7 @@ return [
         //客户端识别信息
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         //通过ip获取详细地址
-        'Ip'  => Zhuzhichao\IpLocationZh\Ip::class, 
+        //'Ip'  => Zhuzhichao\IpLocationZh\Ip::class, 
     ],
 
 ];

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 
+use Illuminate\Database\Events\QueryExecuted;
 use Monolog\Handler\RotatingFileHandler;
 use Monolog\Processor\ProcessIdProcessor;
 use Illuminate\Support\ServiceProvider;
@@ -66,6 +67,18 @@ class AppServiceProvider extends ServiceProvider
                 }
             );
         }
+
+
+        //日志记录,参考网址：https://github.com/overtrue/laravel-query-logger
+        \Log::info('============ URL: '.request()->fullUrl().' ===============');
+        DB::listen(function (QueryExecuted $query) {
+            $sqlWithPlaceholders = str_replace(['%', '?'], ['%%', '%s'], $query->sql);
+            $bindings = $query->connection->prepareBindings($query->bindings);
+            $pdo = $query->connection->getPdo();
+            $realSql = vsprintf($sqlWithPlaceholders, array_map([$pdo, 'quote'], $bindings));
+            $duration = $this->formatDuration($query->time / 1000);
+            \Log::debug(sprintf('[%s] %s', $duration, $realSql));
+        });
     }
 
     /**
@@ -79,5 +92,23 @@ class AppServiceProvider extends ServiceProvider
             //参考网址：https://github.com/barryvdh/laravel-ide-helper
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+    }
+
+    /**
+     * Format duration.
+     *
+     * @param float $seconds
+     *
+     * @return string
+     */
+    private function formatDuration($seconds)
+    {
+        if ($seconds < 0.001) {
+            return round($seconds * 1000000) . 'μs';
+        } elseif ($seconds < 1) {
+            return round($seconds * 1000, 2) . 'ms';
+        }
+
+        return round($seconds, 2) . 's';
     }
 }
