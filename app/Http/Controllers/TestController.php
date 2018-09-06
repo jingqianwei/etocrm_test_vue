@@ -16,59 +16,10 @@ class TestController extends Controller
     //测试写一个新的provide，然后根据不同的条件来实例化不同的service
     public function index(CustomServiceInterface $customServiceInstance, Request $request)
     {
-        $items = array(
-            [
-                "uid"=>1,
-                "pid"=>0,
-                "views"=>100
-            ],
-            [
-                "uid"=>2,
-                "pid"=>1,
-                "views"=>200
-            ],
-            [
-                "uid"=>3,
-                "pid"=>0,
-                "views"=>300
-            ],
-            [
-                "uid"=>4,
-                "pid"=>0,
-                "views"=>400
-            ],
-            [
-                "uid"=>5,
-                "pid"=>3,
-                "views"=>500
-            ]
-        );
-
-//        array_walk($items,function ($item, $key) use(&$items){
-//            //当前item的pid
-//            $pid = $item['pid'];
-//            //父id的在items中的索引
-//            $pidIndex = array_search($pid,array_column($items,'uid'));
-//            if($pid !== 0 && false !== $pidIndex) {
-//                //sum到父id记录中
-//                $items[$pidIndex]['views'] += $item['views'];
-//                //unset($items[$key]);
-//            }
-//        });
-
-
-        array_walk($items,function ($item,$key) use(&$items){
-            //$uid = $item['uid'];
-            $pid = $item['pid'];
-            $row = array_combine(array_keys($items),array_column($items,'uid'));
-            $pidIndex = array_search($pid,$row );
-            if($pid !== 0 && false !== $pidIndex) {
-                $items[$pidIndex]['views'] += $item['views'];
-                unset($items[$key]);
-            }
-        });
-
-        dd($items);
+        echo '11111';
+        logger('logger log');
+        clock('clock log');
+        die;
         $config = [
             "host"=> "192.168.78.129",
             "user"=> "jqw",

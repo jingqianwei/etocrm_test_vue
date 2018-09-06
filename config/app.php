@@ -160,6 +160,8 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
         // 客户端查看日志
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        // 客户端调式工具
+        Clockwork\Support\Laravel\ClockworkServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -228,6 +230,8 @@ return [
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         //通过ip获取详细地址
         //'Ip'  => Zhuzhichao\IpLocationZh\Ip::class, 
+        //客户端调式工具
+        'Clockwork' => Clockwork\Support\Laravel\Facade::class,
     ],
 
 ];
