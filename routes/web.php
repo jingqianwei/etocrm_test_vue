@@ -29,3 +29,6 @@ Route::get('/test/index', 'TestController@index');
 Route::get('/member/index', 'MemberController@loginSub');
 
 Route::view('/shop', 'vue.shop');
+
+//日志查看页面
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');

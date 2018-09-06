@@ -158,6 +158,8 @@ return [
         DingNotice\DingNoticeServiceProvider::class,
         // 客户端识别信息
         Jenssegers\Agent\AgentServiceProvider::class,
+        // 客户端查看日志
+        Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         /*
          * Application Service Providers...
          */
