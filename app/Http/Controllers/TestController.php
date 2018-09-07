@@ -16,11 +16,14 @@ class TestController extends Controller
     //测试写一个新的provide，然后根据不同的条件来实例化不同的service
     public function index(CustomServiceInterface $customServiceInstance, Request $request)
     {
+        \Debugbar::info('哈哈哈哈哈');
         logger('logger log');
+        clock()->startEvent('index.log', '这是一个测试'); //测试代码执行速度
         clock('clock log');
+        clock()->endEvent('index.log');
         return view('.vue.shop'); //Clockwork对于有输出视图才有用
         $config = [
-            "host"=> "192.168.78.129",
+            "host"=> "192.168.78.133",
             "user"=> "jqw",
             "port"=> "22",
             "passwd"=> "root"

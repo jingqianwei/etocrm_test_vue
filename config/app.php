@@ -162,6 +162,8 @@ return [
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
         // 客户端调式工具
         Clockwork\Support\Laravel\ClockworkServiceProvider::class,
+        // debug调式工具
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -232,6 +234,8 @@ return [
         //'Ip'  => Zhuzhichao\IpLocationZh\Ip::class, 
         //客户端调式工具
         'Clockwork' => Clockwork\Support\Laravel\Facade::class,
+        //debug调式工具
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
     ],
 
 ];
