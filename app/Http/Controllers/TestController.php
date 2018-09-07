@@ -16,10 +16,9 @@ class TestController extends Controller
     //测试写一个新的provide，然后根据不同的条件来实例化不同的service
     public function index(CustomServiceInterface $customServiceInstance, Request $request)
     {
-        echo '11111';
         logger('logger log');
         clock('clock log');
-        die;
+        return view('.vue.shop'); //Clockwork对于有输出视图才有用
         $config = [
             "host"=> "192.168.78.129",
             "user"=> "jqw",
