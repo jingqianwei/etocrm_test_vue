@@ -32,8 +32,8 @@ class BackupDatabase extends Command
     {
         parent::__construct();
 
-        if (!file_exists(storage_path('backups'))) {
-            mkdir(storage_path('backups'), 0777);
+        if (!file_exists(storage_path('logs' . DIRECTORY_SEPARATOR . 'backups'))) {
+            mkdir(storage_path('logs' . DIRECTORY_SEPARATOR . 'backups'), 0777);
         }
     }
 
@@ -68,7 +68,7 @@ class BackupDatabase extends Command
             config("database.connections.{$dbConnection}.username"),
             config("database.connections.{$dbConnection}.password"),
             config("database.connections.{$dbConnection}.database"),
-            storage_path('backups') . DIRECTORY_SEPARATOR . 'backup_' . date('Ymd') . '.sql'
+            storage_path('logs' . DIRECTORY_SEPARATOR . 'backups') . DIRECTORY_SEPARATOR . 'backup_' . date('Ymd') . '.sql'
         ));
     }
 }
