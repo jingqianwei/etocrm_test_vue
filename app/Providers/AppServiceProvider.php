@@ -75,6 +75,8 @@ class AppServiceProvider extends ServiceProvider
             $sqlWithPlaceholders = str_replace(['%', '?'], ['%%', '%s'], $query->sql);
             $bindings = $query->connection->prepareBindings($query->bindings);
             $pdo = $query->connection->getPdo();
+            //array_map([$pdo, 'quote'], $bindings), 上面是把数组$bindings的每一个元素都执行$pdo对象的quote方法，最后结果以数组的形式返回。
+            //例如$pdo->quote();方法，作用1. 为普通字符串添加引号，作用2. 转义特殊字符串
             $realSql = vsprintf($sqlWithPlaceholders, array_map([$pdo, 'quote'], $bindings));
             $duration = $this->formatDuration($query->time / 1000);
             \Log::debug(sprintf('[%s] %s', $duration, $realSql));
