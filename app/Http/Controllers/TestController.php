@@ -64,10 +64,11 @@ class TestController extends Controller
             ]
         ];
 
-        $multiplied = collect($data)->groupBy('create_at')
-                                    ->map(function($item){
-                                        return ['total_num' => $item->sum('num')];
-                                    })->toArray();
+        $multiplied = collect($data)
+                    ->groupBy('create_at')
+                    ->map(function($item){
+                        return ['total_num' => $item->sum('num')];
+                    })->toArray();
 
         dd($multiplied);
         return UserResource::collection(User::all()); //用于多条数据处理接口返回的数据结构处理，可以自由的组合
