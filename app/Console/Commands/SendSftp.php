@@ -90,7 +90,8 @@ class SendSftp extends Command
         $this->info('上传MD5文件，完成任务……');
     }
 
-    public function getSftp($localhost_file, $tableName, $real_path){
+    public function getSftp($localhost_file, $tableName, $real_path)
+    {
         $config = array(
             "host"=> "118.25.33.139",
             "username"=> "etocrm_user",
