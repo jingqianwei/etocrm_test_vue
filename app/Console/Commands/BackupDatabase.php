@@ -53,7 +53,7 @@ class BackupDatabase extends Command
             // 删除N天之前的备份
             $files = scandir($this->path);
             foreach ($files as $file) {
-                if (!in_array($file, ['.', '..']) && now()->diffIndays(substr($file, 7, 10)) >= env('DB_BACKUP_DAYS', 5)) {
+                if (!in_array($file, ['.', '..']) && now()->diffIndays(substr($file, 7, 10)) >= env('DB_BACKUP_DAYS')) {
                     unlink($this->path . $file);
                 }
             }
