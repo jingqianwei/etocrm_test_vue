@@ -8,7 +8,8 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 
 class BackupDatabase extends Command
 {
-    protected $process; //进度
+    protected $path = null; //保存地址
+    protected $process = null; //进度
     /**
      * The name and signature of the console command.
      *
@@ -32,8 +33,9 @@ class BackupDatabase extends Command
     {
         parent::__construct();
 
-        if (!file_exists(storage_path('logs' . DIRECTORY_SEPARATOR . 'backups'))) {
-            mkdir(storage_path('logs' . DIRECTORY_SEPARATOR . 'backups'), 0777);
+        $this->path = storage_path('logs' . DIRECTORY_SEPARATOR . 'backups');
+        if (!file_exists($this->path)) {
+            mkdir($this->path, 0777);
         }
     }
 
@@ -48,6 +50,13 @@ class BackupDatabase extends Command
         $dbConnection = $this->argument('connection');
         $this->setProcess($dbConnection);
         try {
+            // 删除N天之前的备份
+            $files = scandir($this->path);
+            foreach ($files as $file) {
+                if (!in_array($file, ['.', '..']) && now()->diffIndays(substr($file, 7, 10)) >= env('DB_BACKUP_DAYS', 5)) {
+                    unlink($this->path . $file);
+                }
+            }
             $this->process->mustRun();
             $this->info('The backup has been proceed successfully.');
         } catch (ProcessFailedException $e) {
@@ -68,7 +77,7 @@ class BackupDatabase extends Command
             config("database.connections.{$dbConnection}.username"),
             config("database.connections.{$dbConnection}.password"),
             config("database.connections.{$dbConnection}.database"),
-            storage_path('logs' . DIRECTORY_SEPARATOR . 'backups') . DIRECTORY_SEPARATOR . 'backup_' . date('Ymd') . '.sql'
+            $this->path . DIRECTORY_SEPARATOR . 'backup_' . date('Ymd') . '.sql'
         ));
     }
 }
