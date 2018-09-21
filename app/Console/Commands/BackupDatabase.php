@@ -51,7 +51,7 @@ class BackupDatabase extends Command
         $this->setProcess($dbConnection);
         try {
             // 删除N天之前的备份
-            $files = scandir($this->path);
+            $files = scandir($this->path); //获取目录下的所有文件
             foreach ($files as $file) {
                 if (!in_array($file, ['.', '..']) && now()->diffIndays(substr($file, 7, 10)) >= env('DB_BACKUP_DAYS')) {
                     unlink($this->path . $file);
