@@ -16,6 +16,23 @@ class TestController extends Controller
     //测试写一个新的provide，然后根据不同的条件来实例化不同的service
     public function index(CustomServiceInterface $customServiceInstance, Request $request)
     {
+        $data = [
+            ['id' => 1, 'parent_id' => 100, 'title' => 'A', 'sort' => 1],
+            ['id' => 2, 'parent_id' => 100, 'title' => 'A', 'sort' => 3],
+            ['id' => 3, 'parent_id' => 100, 'title' => 'A', 'sort' => 5],
+            ['id' => 4, 'parent_id' => 100, 'title' => 'B', 'sort' => 7],
+            ['id' => 5, 'parent_id' => 101, 'title' => 'A', 'sort' => 9],
+        ];
+
+        echo batchUpdates($data, 'id', ['parent_id' => 100, 'title' => 'A']);
+        /**
+         * 输出结果
+         * UPDATE `post` SET `id` = CASE `id` WHEN '1' THEN '1' WHEN '2' THEN '2' WHEN '3' THEN '3' WHEN '4' THEN '4' WHEN '5' THEN '5' END,
+         * `parent_id` = CASE `id` WHEN '1' THEN '100' WHEN '2' THEN '100' WHEN '3' THEN '100' WHEN '4' THEN '100' WHEN '5' THEN '101' END,
+         * `title` = CASE `id` WHEN '1' THEN 'A' WHEN '2' THEN 'A' WHEN '3' THEN 'A' WHEN '4' THEN 'B' WHEN '5' THEN 'A' END,
+         * `sort` = CASE `id` WHEN '1' THEN '1' WHEN '2' THEN '3' WHEN '3' THEN '5' WHEN '4' THEN '7' WHEN '5' THEN '9' END
+         * WHERE `id` IN ('1','2','3','4','5') AND `parent_id` = '100' AND `title` = 'A'
+         */
         \Debugbar::info('哈哈哈哈哈');
         logger('logger log');
         clock()->startEvent('index.log', '这是一个测试'); //测试代码执行速度

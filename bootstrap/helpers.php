@@ -47,10 +47,10 @@ if (!function_exists('batch_updates')) {
         // 获取所有键名为$field列的值，值两边加上单引号
         // array_column()函数需要PHP5.5.0+，如果小于这个版本，可以自己实现，
         // 参考地址：http://php.net/manual/zh/function.array-column.php#118831
-        $fields = implode(',', array_map(function($value) {
-                    return "'".$value."'";
-                }, array_column($data, $field)));
-        $sql = sprintf("UPDATE `%s` SET %s WHERE `%s` IN (%s) %s", 'post', $updates, $field, $fields, $where);
+        $fields = implode(',', array_map(function($value) { return "'{$value}'"; }, array_column($data, $field)));
+        $sql = sprintf(/** @lang text */
+            "UPDATE `%s` SET %s WHERE `%s` IN (%s) %s", 'post', $updates, $field, $fields, $where
+        );
 
         return $sql;
     }
@@ -90,6 +90,5 @@ if (!function_exists('batch_updates')) {
 
         return $where ? ' AND ' . implode(' AND ', $where) : '';
     }
-
 }
 
