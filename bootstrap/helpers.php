@@ -90,5 +90,21 @@ if (!function_exists('batch_updates')) {
 
         return $where ? ' AND ' . implode(' AND ', $where) : '';
     }
+
+
+}
+
+if (!function_exists('get_table')) {
+
+    /**
+     * @param $id int 用户id
+     * @param $bit int 标示表后缀的位数
+     * @param $seed int 示要移位的位数即：单个表能存储的记录条数
+     * @return string
+     */
+    function getTable($id, $bit, $seed)
+    {
+        return 'user_'.sprintf('%0' . $bit . 'd', ($id >> $seed));
+    }
 }
 
