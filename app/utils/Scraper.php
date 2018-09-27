@@ -54,8 +54,8 @@ final class Scraper
     {
         $crawler = new Crawler($html);
         $imageUrl = $crawler->filter('.image-section__image')->attr('src');
-        preg_match('/photos\/\d+\/([\w-\.]+)\?/', $imageUrl, $matches);
-        $filePath = $this->directory . DIRECTORY_SEPARATOR . $matches[1];
+        preg_match('/photos\/\d+\/(?<fileDir>[\w-\.]+)\?/', $imageUrl, $matches);
+        $filePath = $this->directory . DIRECTORY_SEPARATOR . $matches['fileDir']; //让匹配出的结果为关联数组，这样更有语义化
         $this->client->get($imageUrl)->then(
             function(ResponseInterface $response) use ($filePath) {
                 $this->filesystem->file($filePath)->putContents((string)$response->getBody());
